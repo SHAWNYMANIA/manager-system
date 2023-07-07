@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 //页面跳转controller
 @Controller
+@RequestMapping
 public class PageController {
 
     //跳转到index页面 @return

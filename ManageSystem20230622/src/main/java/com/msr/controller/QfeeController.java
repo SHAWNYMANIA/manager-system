@@ -45,8 +45,8 @@ public class QfeeController {
 
 
     //分页方法
-    @RequestMapping("/listpage")
-    public PageUtils<Qfee> listpage(QfeeQuery qfeeQuery){
+    @RequestMapping("/listPage")
+    public PageUtils<Qfee> listPage(QfeeQuery qfeeQuery){
         PageUtils<Qfee> qfeePageUtils = qfeeService.pageQfeeList(qfeeQuery);
         List<Qfee> qfeeList = qfeePageUtils.getRows();//获取当前页的集合数据
         // 遍历处理proprietor中的user赋值
