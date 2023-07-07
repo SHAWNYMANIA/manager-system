@@ -2,6 +2,8 @@ package com.msr.service;
 
 import com.msr.entity.Qfee;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.msr.query.QfeeQuery;
+import com.msr.utils.PageUtils;
 
 /**
  * <p>
@@ -12,5 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-07-08
  */
 public interface IQfeeService extends IService<Qfee> {
-
+    public PageUtils<Qfee> pageQfeeList(QfeeQuery qfeeQuery);
 }

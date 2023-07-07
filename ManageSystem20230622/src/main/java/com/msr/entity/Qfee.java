@@ -1,7 +1,12 @@
 package com.msr.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
@@ -13,6 +18,9 @@ import java.io.Serializable;
  * @author bruce
  * @since 2023-07-08
  */
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Qfee implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,11 +39,15 @@ public class Qfee implements Serializable {
     /**
      * 缴费时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime jftime;
 
     /**
      * 欠费时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime qftime;
 
     /**
@@ -63,134 +75,36 @@ public class Qfee implements Serializable {
      */
     private Integer feetypeid;
 
+    @TableField(exist = false)
+    private Feetype feetype;
+
     /**
      * 关联业主
      */
     private Long proprietorid;
 
+    @TableField(exist=false)
+    private Proprietor proprietor;
+
     /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createDate;
 
     /**
      * 修改时间
      */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateDate;
 
     /**
      * 是否删除
      */
+    @TableLogic
     private Integer isdel;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public String getQfno() {
-        return qfno;
-    }
-
-    public void setQfno(String qfno) {
-        this.qfno = qfno;
-    }
-    public LocalDateTime getJftime() {
-        return jftime;
-    }
-
-    public void setJftime(LocalDateTime jftime) {
-        this.jftime = jftime;
-    }
-    public LocalDateTime getQftime() {
-        return qftime;
-    }
-
-    public void setQftime(LocalDateTime qftime) {
-        this.qftime = qftime;
-    }
-    public Double getQfmoney() {
-        return qfmoney;
-    }
-
-    public void setQfmoney(Double qfmoney) {
-        this.qfmoney = qfmoney;
-    }
-    public String getQfremark() {
-        return qfremark;
-    }
-
-    public void setQfremark(String qfremark) {
-        this.qfremark = qfremark;
-    }
-    public Double getQfuse() {
-        return qfuse;
-    }
-
-    public void setQfuse(Double qfuse) {
-        this.qfuse = qfuse;
-    }
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-    public Integer getFeetypeid() {
-        return feetypeid;
-    }
-
-    public void setFeetypeid(Integer feetypeid) {
-        this.feetypeid = feetypeid;
-    }
-    public Long getProprietorid() {
-        return proprietorid;
-    }
-
-    public void setProprietorid(Long proprietorid) {
-        this.proprietorid = proprietorid;
-    }
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(LocalDateTime updateDate) {
-        this.updateDate = updateDate;
-    }
-    public Integer getIsdel() {
-        return isdel;
-    }
-
-    public void setIsdel(Integer isdel) {
-        this.isdel = isdel;
-    }
-
-    @Override
-    public String toString() {
-        return "Qfee{" +
-            "id=" + id +
-            ", qfno=" + qfno +
-            ", jftime=" + jftime +
-            ", qftime=" + qftime +
-            ", qfmoney=" + qfmoney +
-            ", qfremark=" + qfremark +
-            ", qfuse=" + qfuse +
-            ", status=" + status +
-            ", feetypeid=" + feetypeid +
-            ", proprietorid=" + proprietorid +
-            ", createDate=" + createDate +
-            ", updateDate=" + updateDate +
-            ", isdel=" + isdel +
-        "}";
-    }
 }

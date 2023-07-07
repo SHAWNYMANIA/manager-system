@@ -40,4 +40,10 @@ public class PageController {
     public String proprietor_list(){
         return "views/proprietor/proprietor_list";
     }
+
+    //跳转到fee_list页面
+    @RequestMapping("/fee_list")
+    public String fee_list(){
+        return "views/fee/fee_list";
+    }
 }

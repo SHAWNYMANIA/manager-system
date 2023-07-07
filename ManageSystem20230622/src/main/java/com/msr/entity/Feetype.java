@@ -1,7 +1,11 @@
 package com.msr.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
@@ -13,6 +17,9 @@ import java.io.Serializable;
  * @author bruce
  * @since 2023-07-08
  */
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Feetype implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,86 +53,22 @@ public class Feetype implements Serializable {
     /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createDate;
 
     /**
      * 更新时间
      */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateDate;
 
     /**
      * 是否删除
      */
+    @TableLogic
     private Integer isdel;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public String getFeeno() {
-        return feeno;
-    }
-
-    public void setFeeno(String feeno) {
-        this.feeno = feeno;
-    }
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    public Double getStander() {
-        return stander;
-    }
-
-    public void setStander(Double stander) {
-        this.stander = stander;
-    }
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(LocalDateTime updateDate) {
-        this.updateDate = updateDate;
-    }
-    public Integer getIsdel() {
-        return isdel;
-    }
-
-    public void setIsdel(Integer isdel) {
-        this.isdel = isdel;
-    }
-
-    @Override
-    public String toString() {
-        return "Feetype{" +
-            "id=" + id +
-            ", feeno=" + feeno +
-            ", title=" + title +
-            ", stander=" + stander +
-            ", unit=" + unit +
-            ", createDate=" + createDate +
-            ", updateDate=" + updateDate +
-            ", isdel=" + isdel +
-        "}";
-    }
 }
