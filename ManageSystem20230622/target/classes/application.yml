@@ -1,9 +1,0 @@
-# Swagger配置
-swagger:
-  base-package: com.msr.controller
-  title: 物业管理系统API接口文档
-  contact:
-    name: tom
-    email: 20334359@qq.com
-    url: http://www.baidu.com
-  version: 1.0
