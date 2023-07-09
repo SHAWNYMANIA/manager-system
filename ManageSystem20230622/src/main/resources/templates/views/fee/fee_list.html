@@ -191,6 +191,14 @@
                                                         <input type="text" class="form-control" name="qfremark" id="a_qfremark" placeholder="请输入欠费说明">
                                                     </div>
                                                 </div>
+
+<!--                                                <div class="form-group">-->
+<!--                                                    <label for="a_qfmoney" class="col-sm-2 control-label">缴费状态</label>-->
+<!--                                                    <div class="col-sm-9">-->
+<!--                                                        <input type="checkbox" checked class="form-control" id="a_status" placeholder="请选择缴费状态">-->
+<!--                                                        <input type="hidden" id="a_status_hidden" class="form-control" name="status">-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
                                             </form>
                                         </div>
 
@@ -269,6 +277,14 @@
                                                         <input type="text" class="form-control" name="qfremark" id="e_qfremark" placeholder="请输入欠费说明">
                                                     </div>
                                                 </div>
+
+<!--                                                <div class="form-group">-->
+<!--                                                    <label for="e_qfmoney" class="col-sm-2 control-label">缴费状态</label>-->
+<!--                                                    <div class="col-sm-9">-->
+<!--                                                        <input type="checkbox" checked class="form-control" id="e_status" placeholder="请选择缴费状态">-->
+<!--                                                        <input type="hidden" id="e_status_hidden" class="form-control" name="status">-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -396,8 +412,9 @@
                     field: 'jftime',
                     title: '缴费时间',
                     fixed: true,
-                    width: 120
+                    width: 120,
                 },
+
                 {
                     field: 'qfremark',
                     title: '欠费说明',
@@ -463,6 +480,26 @@
         $("#e_qfuse").val(editRow.qfuse);
         $("#e_feetypeid").val(editRow.feetypeid);
         $("#e_proprietorid").val(editRow.proprietorid);
+        var statusval = editRow.status;
+        if(statusval == 0){
+            $("#e_status").prop("checked",false);
+        }else{
+            $("#e_status").prop("checked",true);
+        }
+        $("#e_status").bootstrapSwitch({
+            onText:"是",
+            offText:"否",
+            onColor:"primary",
+            offColor:"warning",
+            onSwitchChange:function(){
+                var checkedOfAll=$("#e_status").prop("checked");
+                if(checkedOfAll == false){
+                    $("#e_status_hidden").val(0);
+                }else{
+                    $("#e_status_hidden").val(1);
+                }
+            }
+        });
     }
 
     /**

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -128,6 +129,22 @@ public class QfeeController {
             return Results.fail(ResultCode.FAIL);
         }
 
+    };
+
+    @PostMapping("/editSaveQfee")
+    public Results editSaveQfee(Qfee qfee){
+        try{
+            if(qfee.getStatus() == 1){
+                qfee.setJftime(LocalDateTime.now());
+            }else{
+                qfee.setJftime(null);
+            }
+            qfeeService.updateById(qfee);
+            return Results.success(ResultCode.SUCCESS);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new Results();
     }
 
 }
