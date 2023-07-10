@@ -1,5 +1,6 @@
 package com.msr.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,7 @@ public class Feetype implements Serializable {
     /**
      * 标题
      */
+    @Excel(name="欠费种类",width = 20,needMerge = true)
     private String title;
 
     /**

@@ -22,6 +22,15 @@
     </properties>
 
     <dependencies>
+        <!--导入easyPoi依赖-->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-spring-boot-starter</artifactId>
+            <version>4.4.0</version>
+        </dependency>
+
+
+
         <!--导入SpringBoot的Web场景启动器   Web相关的包导入！-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

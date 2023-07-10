@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -47,11 +48,10 @@ public class QfeeController {
 
     //分页方法
     @RequestMapping("/listPage")
-    public PageUtils<Qfee> listPage(QfeeQuery qfeeQuery){
-        PageUtils<Qfee> qfeePageUtils = qfeeService.pageQfeeList(qfeeQuery);
-        List<Qfee> qfeeList = qfeePageUtils.getRows();//获取当前页的集合数据
-        // 遍历处理proprietor中的user赋值
-        for(Qfee qfee:qfeeList){
+    public PageUtils<Qfee> listPage(QfeeQuery qfeeQuery, HttpSession session){
+        PageUtils<Qfee> qfeeList = qfeeService.pageQfeeList(qfeeQuery);
+        // 遍历处理 赋值
+        for(Qfee qfee:qfeeList.getRows()){
             // 根据id 获取对象
             Proprietor proprietor = proprietorService.getById(qfee.getProprietorid());
             Feetype feetype = feetypeService.getById(qfee.getFeetypeid());
@@ -59,7 +59,8 @@ public class QfeeController {
             qfee.setProprietor(proprietor);
             qfee.setFeetype(feetype);
         }
-        return qfeePageUtils;
+        session.setAttribute("qfeeList",qfeeList.getRows());
+        return qfeeList;
     }
 
     // 加载下拉列表的集合数据

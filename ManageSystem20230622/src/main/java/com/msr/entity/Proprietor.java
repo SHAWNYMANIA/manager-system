@@ -1,5 +1,6 @@
 package com.msr.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -39,6 +40,7 @@ public class Proprietor implements Serializable {
     /**
      * 姓名
      */
+    @Excel(name="业主姓名",width = 20,needMerge = true)
     private String name;
 
     /**
