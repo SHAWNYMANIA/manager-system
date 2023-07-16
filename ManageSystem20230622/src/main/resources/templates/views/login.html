@@ -122,7 +122,7 @@
     var password = $("#password").val();
     // 发送异步ajax请求
     $.ajax({
-      url:'/user/login',
+      url:'/login',
       type:'POST',
       data:{"username":username,"password":password},
       success:function(data){

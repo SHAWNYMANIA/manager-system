@@ -2,6 +2,7 @@ package com.msr.service;
 
 import com.msr.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * <p>
@@ -11,6 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author bruce
  * @since 2023-06-22
  */
-public interface IUserService extends IService<User> {
+public interface IUserService extends IService<User>, UserDetailsService {
 
 }

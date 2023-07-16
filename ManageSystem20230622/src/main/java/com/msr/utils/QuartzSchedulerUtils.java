@@ -17,7 +17,7 @@ public class QuartzSchedulerUtils {
     public void startJob() throws SchedulerException {
         startJob1(scheduler);
         startJob2(scheduler);
-        scheduler.start();
+        //scheduler.start();
     }
 
     // 获取Job信息
