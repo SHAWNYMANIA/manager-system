@@ -4,16 +4,25 @@ import com.msr.handler.LoginFailureHandler;
 import com.msr.handler.LoginSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity //表示开启Security配置
+@EnableGlobalMethodSecurity(prePostEnabled = true) //开启细粒度控制
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private LoginSuccessHandler loginSuccessHandler;
@@ -53,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //放行路径，不需要认证
                 .antMatchers("/static/**")
                 .permitAll() //以上放行
-                .antMatchers("/**").hasAnyRole("USER")//其它的需要USER角色
+                //.antMatchers("/**").hasAnyRole("USER")//其它的需要USER角色
                 .anyRequest().authenticated()//其它请求，必须登录
                 .and() //并且
                 .formLogin()//采用表单登录
@@ -83,5 +92,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .disable();//禁用CSRF请求伪造攻击防御
+
+        // 权限不够返回处理
+        http.exceptionHandling().accessDeniedHandler(new AccessDeniedHandler() {
+            @Override
+            public void handle(HttpServletRequest req, HttpServletResponse resp,
+                               AccessDeniedException e) throws IOException, ServletException {
+                String type = req.getHeader("X-Requested-With");
+                //如果是异步
+                if("XMLHttpRequest".equals(type)){
+                    resp.getWriter().print("403");
+                }else{
+                    //非异步
+                    req.getRequestDispatcher("/403").forward(req,resp);
+                }
+            }
+        });
     }
 }

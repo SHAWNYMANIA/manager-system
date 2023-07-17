@@ -47,4 +47,22 @@ public class PageController {
     public String fee_list(){
         return "views/fee/fee_list";
     }
+
+    //跳转到500页面
+    @RequestMapping("/500")
+    public String error500(){
+        return "/views/error500";
+    }
+
+    //跳转到404页面
+    @RequestMapping("/404")
+    public String error404(){
+        return "/views/error404";
+    }
+
+    //跳转到403页面
+    @RequestMapping("/403")
+    public String error403(){
+        return "/views/error403";
+    }
 }

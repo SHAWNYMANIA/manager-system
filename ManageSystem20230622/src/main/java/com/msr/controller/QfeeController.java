@@ -14,6 +14,7 @@ import com.msr.utils.PageUtils;
 import com.msr.utils.ResultCode;
 import com.msr.utils.Results;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +49,7 @@ public class QfeeController {
 
     //分页方法
     @RequestMapping("/listPage")
+    //@PreAuthorize("hasRole('ROLE_超级管理员')")
     public PageUtils<Qfee> listPage(QfeeQuery qfeeQuery, HttpSession session){
         PageUtils<Qfee> qfeeList = qfeeService.pageQfeeList(qfeeQuery);
         // 遍历处理 赋值
