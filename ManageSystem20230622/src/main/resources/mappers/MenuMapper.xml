@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace:命名空间 -->
+<mapper namespace="com.msr.mapper.MenuMapper">
+    <resultMap id="menuMap" type="com.msr.entity.Menu">
+        <!-- 父菜单映射 -->
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="url" property="url"></result>
+        <result column="icon" property="icon"></result>
+
+        <collection property="childs"  ofType="com.msr.entity.Menu">
+            <!-- 子菜单映射 -->
+            <id column="sid" property="id"></id>
+            <result column="sname" property="name"></result>
+            <result column="surl" property="url"></result>
+            <result column="sicon" property="icon"></result>
+        </collection>
+    </resultMap>
+
+    <select id="findAll" parameterType="long" resultMap="menuMap">
+        select
+            DISTINCT
+            pub.id,
+            pub.name,
+            pub.url,
+            pub.icon,
+            sub.id sid,
+            sub.name sname,
+            sub.url surl,
+            sub.icon sicon
+        from
+            (
+                select m.* from
+                    user u
+                        join user_role ur on ur.userid = u.id
+                        join role r on ur.roleid = r.id
+                        join role_permission rp on rp.roleid = r.id
+                        join permission p on rp.permissionid = p.id
+                        join menu m on p.menuid = m.id
+                where ur.userid=#{userid}
+            )	sub join menu pub on pub.id = sub.pid
+    </select>
+</mapper>

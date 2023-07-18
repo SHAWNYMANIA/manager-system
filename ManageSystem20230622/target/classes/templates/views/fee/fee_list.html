@@ -77,7 +77,7 @@
                                 <!-- 按钮区start-->
                                 <div class="toolbar-btn-action">
                                     <!-- sec:authorize= "hasRole('管理员')" -->
-                                    <button  type="button" class="btn btn-primary" data-toggle="modal" data-method="add" >
+                                    <button  type="button" sec:authorize= "hasRole('超级管理员')" class="btn btn-primary" data-toggle="modal" data-method="add" >
                                         <i class="mdi mdi-plus"></i>新增
                                     </button>
                                     <!-- sec:authorize= "hasRole('管理员')" -->
